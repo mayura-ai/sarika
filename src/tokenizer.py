@@ -1,8 +1,11 @@
 import torch
 from snac import SNAC
+import warnings
+
+warnings.filterwarnings("ignore")
 
 
-class SNACTokenizer:
+class AudioTokenizer:
     def __init__(self, device="cpu") -> None:
         self.device = device
         self.model = (
@@ -24,7 +27,6 @@ class SNACTokenizer:
                     for j in range(2):
                         flattened_list.append(tensors[1][batch][j + i * 2].item())
                         for k in range(2):
-                            # print(k,i)
                             flattened_list.append(
                                 tensors[2][batch][k + j * 2 + i * 4].item()
                             )
@@ -36,7 +38,6 @@ class SNACTokenizer:
                     for j_ in range(2):
                         flattened_list.append(tensors[1][batch][j_ + i_ * 2].item())
                         for k_ in range(2):
-                            # print(k,i)
                             flattened_list.append(
                                 tensors[2][batch][k_ + j_ * 2 + i_ * 4].item()
                             )
